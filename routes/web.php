@@ -20,9 +20,10 @@ Route::get('/', function () {
 });
 
 Route::resource('products',ProductController::class);
-Route::post('products.update', [ProductController::class, 'update'])->name('products.update');
+Route::put('products.status/{product}', [ProductController::class, 'status'])->name('products.status');
 
 Route::resource('categories',CategoryController::class);
+Route::put('categories.status/{category}', [CategoryController::class, 'status'])->name('categories.status');
 
 Auth::routes();
 

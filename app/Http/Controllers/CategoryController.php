@@ -45,4 +45,22 @@ class CategoryController extends Controller
     {
         //
     }
+
+    public function status(Category $category)
+    {
+        
+        if ($category->is_active == 1) 
+         {
+            Category::where('id', $category->id)
+                    ->update(['is_active' => 0]);
+         }
+        else 
+         {
+            Category::where('id', $category->id)
+                    ->update(['is_active' => 1]);    
+         }
+
+         return redirect()->back()->with('success','Product Status changed successfully');
+        
+    }
 }

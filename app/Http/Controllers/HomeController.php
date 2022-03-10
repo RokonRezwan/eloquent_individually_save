@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function index()
     {
         $data['products'] = Product::all();
-        $data['categorys'] = Category::all();
+        $data['categories'] = Category::all();
         return view('home', $data);
     }
 }

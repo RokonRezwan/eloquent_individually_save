@@ -71,6 +71,7 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        return $product;
         //validate the input
         $request->validate([
             'name' => 'required',
@@ -79,13 +80,12 @@ class ProductController extends Controller
         ]);
 
         //update product
-        $p = Product::find($product);
- 
-        $p -> push([
-            'name'=>$request->name,
-            'category_id'=>$request->category_id,
-            'is_active'=>$request->is_active,
-        ]);
+        Product::where('id', $product->id)
+                 ->update([
+                     'name' => $product->name,
+                     'category_id' => $product->category_id,
+                     'is_active' => $product->is_active,
+                 ]);
 
         //$product->update();
 
@@ -103,4 +103,23 @@ class ProductController extends Controller
         //redirect the user with a success message
         return redirect()->route('products.index')->with('success','Product deleted successfully');
     }
+
+    public function status(Product $product)
+    {
+        
+        if ($product->is_active == 1) 
+         {
+            Product::where('id', $product->id)
+                    ->update(['is_active' => 0]);
+         }
+        else 
+         {
+            Product::where('id', $product->id)
+                    ->update(['is_active' => 1]);    
+         }
+
+         return redirect()->back()->with('success','Product Status changed successfully');
+        
+    }
+    
 }

@@ -30,8 +30,18 @@
                         <tr>
                               <td>{{ $product->id }}</td>
                               <td>{{ $product->name }}</td>
-                              <td>{{ $product->category->name }}</td>
-                              <td>{{ $product->is_active }}</td>
+                              <td>{{ $product->name}}</td>
+                              <td>
+                                  <form action="{{ route('products.status',$product->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                          @if ($product->is_active == 0)
+                                          <button type="submit" class="btn btn-danger">Deactive</button>
+                                          @else
+                                          <button type="submit" class="btn btn-success">active</button>
+                                          @endif
+                                  </form>
+                              </td>
                               <td>
                                     <form action="{{ route('products.destroy',$product->id) }}" method="POST">
                                           <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>
@@ -45,7 +55,6 @@
                         @endforeach
                   
                   </table>
-
 
                 </div>
             </div>

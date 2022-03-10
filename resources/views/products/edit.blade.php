@@ -16,6 +16,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('products.update', $product->id) }}">
                             @csrf
+                            @method('PUT')
 
                             <div class="mb-3 row">
                                 <label for="name" class="col-md-4 col-form-label text-end">
@@ -42,7 +43,6 @@
 
                                <div class="col-md-6">
                                   <select class="form-control" name="category_id" value="{{ $product->category->name }}" required autocomplete="category_id" autofocus >
-                                      <option selected>{{ $product->category->name }}</option>
                                       @foreach ($categories as $category)                                          
                                       <option value="{{ $category->id }}">{{ $category->name }}</option>
                                       @endforeach
@@ -63,8 +63,7 @@
 
                               <div class="col-md-6">    
 
-                                    <select class="form-control" name="is_active" value="{{ $product->is_active }}" required autocomplete="is_active" autofocus >
-                                          <option selected>Select Active Status</option>                      
+                                    <select class="form-control" name="is_active" value="{{ $product->is_active }}" required autocomplete="is_active" autofocus >                 
                                           <option value="1">Active</option>
                                           <option value="0">Deactive</option>
                                       </select>
